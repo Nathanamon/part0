@@ -1,0 +1,24 @@
+sequenceDiagram
+    participant browser
+    participant server
+
+    browser->>server: POST https://studies.cs.helsinki.fi/exampleapp/new_note
+    Note right of server: Le serveur reçoit la requête<br>avec les données de la nouvelle note.
+    server-->>browser: 302 Found
+    Note left of browser: Le navigateur reçoit la<br> réponse du serveur.
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/noteS
+    server-->>browser: Document HTML
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.csS
+    server-->>browser: La feuille CSS
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    server-->>browser: Le fichier JS est renvoyé
+    Note right of browser: Le code JS est exécuté et requiert des données JSON.
+
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    Note right of browser: Les notes sont reçues et mises en page
+    
